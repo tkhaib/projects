@@ -1,0 +1,118 @@
+create table book (
+    book_id int primary key,
+    title varchar(255),
+    status boolean,
+    copies int,
+    year_published year
+);
+
+create table author (
+    author_id int primary key,
+    name varchar(255),
+    surname varchar(255)
+);
+
+create table publisher (
+    publisher_id int primary key,
+    name varchar(255),
+    country varchar(255)
+);
+
+create table patron (
+    patron_id int primary key,
+    name varchar(255),
+    surname varchar(255),
+    phone int,
+    email varchar(255),
+    status boolean
+);
+
+create table loan (
+    book_id int,
+    patron_id int,
+    primary key (book_id, patron_id),
+    foreign key (book_id) references book(book_id),
+    foreign key (patron_id) references patron(patron_id)
+);
+
+
+-- Insert book
+create procedure AddBook (
+    in new_book_id id int primary key,
+	in new_title varchar(255),
+    in new_status boolean,
+	in new_copies int,
+	in new_year_published year
+)
+begin
+     insert into book(book_id, title, status, copies, year_published)
+	 values (new_book_id, new_title, new_status, new_copies, new_year_published);
+end;
+
+
+-- Delete book
+create procedure DellBook (
+    in existing_book_id int primary key
+)
+begin
+    delete from book
+	where book_id = existing_book_id;
+end;
+
+-- Add patron
+create procedure AddPatron (
+    in new_patron_id int primary key,
+	in new_name varchar(255),
+	in new_surname varchar(255),
+	in new_phone int,
+	in new_email varchar(255),
+	in new_status boolean
+)
+begin
+    insert into patron(patron_id, name, surname, phone, email, status)
+	values (new_patron_id, new_name, new_surname, new_phone, new_email, new_status);
+end;
+
+-- Delete patron
+create procedure DellPatron (
+    in existing_patron_id int primary key
+)
+begin
+    delete from patron
+	where patron_id = existing_patron_id;
+end;
+
+
+-- Update patron
+create procedure UpdatePatron (
+    in existing_patron_id int primary key,
+	in new_name varchar(255),
+	in new_surname varchar(255),
+	in new_phone int,
+	in new_email varchar(255),
+	in new_status boolean
+)
+begin
+    update patron
+	set name = new_name,
+	    surname = new_surname,
+		phone = new_phone,
+		email = new_email,
+		status = new_status
+    where patron_id = existing_patron_id;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
