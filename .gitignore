@@ -1,5 +1,8 @@
 # CUSTOM
-Test_Tutu/ha_data.csv
+*.png
+/Test_Tutu/*.csv
+/Test_Alfa/*.csv
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
